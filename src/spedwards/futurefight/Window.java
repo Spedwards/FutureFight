@@ -36,7 +36,7 @@ public class Window extends JFrame {
 	private JPanel contentPane;
 	private Window instance;
 	
-	public static final String __VERSION__ = "1.0.0";
+	public static final String __VERSION__ = "1.0.1";
 
 	/**
 	 * Launch the application.
