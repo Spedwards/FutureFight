@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 
+import spedwards.futurefight.handler.Version;
 import spedwards.futurefight.htmlreader.Reviews;
 
 public class Window extends JFrame {
@@ -36,7 +37,7 @@ public class Window extends JFrame {
 	private JPanel contentPane;
 	private Window instance;
 	
-	public static final String __VERSION__ = "1.0.1";
+	public static final Version __VERSION__ = new Version("1.0.0");
 
 	/**
 	 * Launch the application.
@@ -199,8 +200,8 @@ public class Window extends JFrame {
 					}
 					br.close();
 					
-					String version = sb.toString().trim();
-					if (__VERSION__.equals(version)) {
+					Version version = new Version(sb.toString().trim());
+					if (__VERSION__.compareTo(version) <= 0) {
 						JOptionPane.showMessageDialog(instance, "You are up to date.", "Update Check", JOptionPane.INFORMATION_MESSAGE);
 					} else {
 						JOptionPane.showMessageDialog(instance, "Latest version is " + version, "Update Check", JOptionPane.INFORMATION_MESSAGE);
