@@ -3,7 +3,14 @@ package spedwards.futurefight;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,6 +20,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JEditorPane;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 
@@ -27,12 +35,25 @@ public class Window extends JFrame {
 	
 	private JPanel contentPane;
 	private Window instance;
+	
+	public static final String __VERSION__ = "1.0.0";
 
 	/**
 	 * Launch the application.
+	 * @throws IOException if all else fails!
 	 */
-	public static void main(String[] args) {
-		new Window();
+	public static void main(String[] args) throws IOException {
+		try {
+			new Window();
+		} catch (Exception e) {
+			try {
+				PrintStream ps = new PrintStream("error.log");
+				e.printStackTrace(ps);
+				ps.close();
+			} catch (FileNotFoundException e1) {
+				new File("error.log").createNewFile();
+			}
+		}
 	}
 
 	/**
@@ -161,6 +182,32 @@ public class Window extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				editorPane.setText(Reviews.getJSON());
 				editorPane.setCaretPosition(0);
+			}
+		});
+		
+		mntmCheckForUpdates.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					URL url = new URL("https://raw.githubusercontent.com/Spedwards/FutureFight/master/VERSION");
+					HttpURLConnection request = (HttpURLConnection) url.openConnection();
+					request.connect();
+					BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+					StringBuilder sb = new StringBuilder();
+					String line;
+					while ((line = br.readLine()) != null) {
+						sb.append(line+"\n");
+					}
+					br.close();
+					
+					String version = sb.toString();
+					if (__VERSION__.equals(version)) {
+						JOptionPane.showMessageDialog(instance, "You are up to date.", "Update Check", JOptionPane.INFORMATION_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(instance, "Latest version is " + version, "Update Check", JOptionPane.INFORMATION_MESSAGE);
+					}
+				} catch (IOException e1) {
+					
+				}
 			}
 		});
 		

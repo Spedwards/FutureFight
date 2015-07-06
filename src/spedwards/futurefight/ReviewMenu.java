@@ -11,6 +11,10 @@ import spedwards.futurefight.htmlreader.Reviews;
 
 public class ReviewMenu extends JMenu {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8470451221638007269L;
 	private ActionListener listener;
 	
 	public ReviewMenu(String name, JTextComponent pane) {
