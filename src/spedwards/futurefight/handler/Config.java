@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 
 import org.json.JSONArray;
@@ -17,9 +16,9 @@ public class Config {
 	
 	private File dir = null;
 	private File file = null;
-	private Class clazz = null;
+	private Class<?> clazz = null;
 
-	public Config(String program, String fileName, Class root) throws IOException {
+	public Config(String program, String fileName, Class<?> root) throws IOException {
 		this.dir = new File(System.getProperty("user.home") + File.separator + program);
 		
 		if (!this.dir.exists()) {
@@ -40,6 +39,7 @@ public class Config {
 		this.clazz = root;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public <T> T readConfig() {
 		try (BufferedReader br = new BufferedReader(new FileReader(this.file))) {
 			StringBuilder sb = new StringBuilder();

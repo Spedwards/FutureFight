@@ -136,14 +136,14 @@ public class Window extends JFrame {
 					JMenuItem mntmWinterSoldier = new JMenuItem("Winter Soldier");
 					mnCharacterReviews.add(mntmWinterSoldier);
 					
-				JMenuItem mntmJSON = new JMenuItem("JSON");
-				mnPage.add(mntmJSON);
-					
 			JMenu mnHelp = new JMenu("Help");
 			menuBar.add(mnHelp);
 				
 				JMenuItem mntmCheckForUpdates = new JMenuItem("Check for Updates");
 				mnHelp.add(mntmCheckForUpdates);
+				
+				JMenuItem mntmJSON = new JMenuItem("JSON");
+				mnHelp.add(mntmJSON);
 				
 				JMenuItem mntmAbout = new JMenuItem("About");
 				mnHelp.add(mntmAbout);
