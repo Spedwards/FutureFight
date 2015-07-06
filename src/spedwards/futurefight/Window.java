@@ -199,7 +199,7 @@ public class Window extends JFrame {
 					}
 					br.close();
 					
-					String version = sb.toString();
+					String version = sb.toString().trim();
 					if (__VERSION__.equals(version)) {
 						JOptionPane.showMessageDialog(instance, "You are up to date.", "Update Check", JOptionPane.INFORMATION_MESSAGE);
 					} else {
