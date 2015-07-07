@@ -37,7 +37,7 @@ public class Window extends JFrame {
 	private JPanel contentPane;
 	private Window instance;
 	
-	public static final Version __VERSION__ = new Version("1.0.0");
+	public static final Version __VERSION__ = new Version("1.0.3");
 
 	/**
 	 * Launch the application.
@@ -131,6 +131,9 @@ public class Window extends JFrame {
 					JMenuItem mntmGroot = new JMenuItem("Groot");
 					mnCharacterReviews.add(mntmGroot);
 					
+					JMenuItem mntmIronMan = new JMenuItem("IronMan");
+					mnCharacterReviews.add(mntmIronMan);
+					
 					JMenuItem mntmKingpin = new JMenuItem("Kingpin");
 					mnCharacterReviews.add(mntmKingpin);
 					
@@ -201,10 +204,10 @@ public class Window extends JFrame {
 					br.close();
 					
 					Version version = new Version(sb.toString().trim());
-					if (__VERSION__.compareTo(version) <= 0) {
+					if (__VERSION__.compareTo(version) >= 0) {
 						JOptionPane.showMessageDialog(instance, "You are up to date.", "Update Check", JOptionPane.INFORMATION_MESSAGE);
 					} else {
-						JOptionPane.showMessageDialog(instance, "Latest version is " + version, "Update Check", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(instance, "Latest version is " + version.get(), "Update Check", JOptionPane.INFORMATION_MESSAGE);
 					}
 				} catch (IOException e1) {
 					
